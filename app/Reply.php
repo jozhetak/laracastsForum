@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
 class Reply extends Model
@@ -65,6 +66,11 @@ class Reply extends Model
         return $this->belongsTo(Thread::class);
     }
 
+    public function wasJustPublished()
+    {
+        return $this->created_at->gt(Carbon::now()->subMinute());
+    }
+
     /**
      * Determine the path to the reply.
      *
@@ -74,4 +80,6 @@ class Reply extends Model
     {
         return $this->thread->path() . "#reply-{$this->id}";
     }
+
+
 }

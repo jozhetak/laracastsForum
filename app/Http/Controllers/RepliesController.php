@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Reply;
 use App\Thread;
+use Illuminate\Support\Facades\Gate;
 
 class RepliesController extends Controller
 {
@@ -35,16 +36,22 @@ class RepliesController extends Controller
      */
     public function store($channelId, Thread $thread)
     {
-        try{
+        if(Gate::denies('create', new Reply)) {
+            return response(
+                'You are posting too frequently', 422
+            );
+        }
+
+        try {
             $this->validate(request(), ['body' => 'required|spamfree']);
+
+            $reply = $thread->addReply([
+                'body' => request('body'),
+                'user_id' => auth()->id()
+            ]);
         } catch(\Exception $e) {
             return response('Sorry you reply could not be saved', 422);
         }
-
-        $reply = $thread->addReply([
-            'body' => request('body'),
-            'user_id' => auth()->id()
-        ]);
 
         return $reply->load('owner');
     }
