@@ -2,14 +2,14 @@
 
 namespace App;
 
-use App\Events\ThreadReceivedNewReply;
 use App\Filters\ThreadFilters;
-use Illuminate\Database\Eloquent\Builder;
+use App\Events\ThreadReceivedNewReply;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Builder;
 
 class Thread extends Model
 {
-    use RecordsActivity;
+    use RecordsActivity, RecordsVisits;
 
     /**
      * Don't auto-apply mass assignment protection.
