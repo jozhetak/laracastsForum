@@ -1,19 +1,16 @@
 <?php
 
-namespace Tests\Unit;
+namespace Tests\Feature;
 
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 
-/**
-*
-*/
 class UserTest extends TestCase
 {
     use DatabaseMigrations;
-
+    
     /** @test */
-    function a_user_can_fetch_their_most_recent_reply()
+    public function a_user_can_fetch_their_most_recent_reply()
     {
         $user = create('App\User');
 
@@ -27,10 +24,10 @@ class UserTest extends TestCase
     {
         $user = create('App\User');
 
-        $this->assertEquals('avatars/default.png', $user->avatar());
+        $this->assertEquals(asset('images/avatars/default.png'), $user->avatar_path);
 
         $user->avatar_path = 'avatars/me.jpg';
 
-        $this->assertEquals('avatars/me.jpg', $user->avatar());
+        $this->assertEquals(asset('avatars/me.jpg'), $user->avatar_path);
     }
 }

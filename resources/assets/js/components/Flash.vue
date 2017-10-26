@@ -1,10 +1,9 @@
 <template>
-    <div
-        class="alert alert-flash"
-        :class="'alert-'+level"
-        role="alert"
-        v-show="show"
-        v-text="body">
+    <div class="alert alert-flash"
+         :class="'alert-'+level"
+         role="alert"
+         v-show="show"
+         v-text="body">
     </div>
 </template>
 

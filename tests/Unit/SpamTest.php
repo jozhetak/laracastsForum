@@ -1,19 +1,19 @@
 <?php
 
-namespace Test\Feature;
+namespace Tests\Feature;
 
 use App\Inspections\Spam;
 use Tests\TestCase;
 
-
 class SpamTest extends TestCase
 {
     /** @test */
-    function it_checks_for_invalid_keywords()
+    public function it_checks_for_invalid_keywords()
     {
         $spam = new Spam();
 
         $this->assertFalse($spam->detect('Innocent reply here'));
+
         $this->expectException('Exception');
 
         $spam->detect('yahoo customer support');
@@ -25,6 +25,8 @@ class SpamTest extends TestCase
         $spam = new Spam();
 
         $this->expectException('Exception');
+
         $spam->detect('Hello world aaaaaaaaa');
+
     }
 }

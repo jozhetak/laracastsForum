@@ -10,14 +10,14 @@ class UserPolicy
     use HandlesAuthorization;
 
     /**
-     * Determine whether the user can update the thread.
+     * Determine whether the user can update the given profile.
      *
-     * @param  \App\User   $user
-     * @param  \App\user $signedInuser
-     * @return mixed
+     * @param  \App\User $signedInUser
+     * @param  \App\User $user
+     * @return boolean
      */
-    public function update(User $user, user $signedInuser)
+    public function update(User $signedInUser, User $user)
     {
-        return $signedInuser->id === $user->id;
+        return $signedInUser->id === $user->id;
     }
 }

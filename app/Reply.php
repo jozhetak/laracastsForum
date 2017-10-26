@@ -66,11 +66,21 @@ class Reply extends Model
         return $this->belongsTo(Thread::class);
     }
 
+    /**
+     * Determine if the reply was just published a moment ago.
+     *
+     * @return bool
+     */
     public function wasJustPublished()
     {
         return $this->created_at->gt(Carbon::now()->subMinute());
     }
 
+    /**
+     * Fetch all mentioned users within the reply's body.
+     *
+     * @return array
+     */
     public function mentionedUsers()
     {
         preg_match_all('/@([\w\-]+)/', $this->body, $matches);
@@ -88,9 +98,17 @@ class Reply extends Model
         return $this->thread->path() . "#reply-{$this->id}";
     }
 
-
+    /**
+     * Set the body attribute.
+     *
+     * @param string $body
+     */
     public function setBodyAttribute($body)
     {
-        $this->attributes['body'] = preg_replace('/@([\w\-]+)/', '<a href="/profiles/$1">$0</a>', $body);
+        $this->attributes['body'] = preg_replace(
+            '/@([\w\-]+)/',
+            '<a href="/profiles/$1">$0</a>',
+            $body
+        );
     }
 }

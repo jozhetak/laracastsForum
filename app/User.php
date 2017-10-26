@@ -3,8 +3,8 @@
 namespace App;
 
 use Carbon\Carbon;
-use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable
 {
@@ -48,6 +48,11 @@ class User extends Authenticatable
         return $this->hasMany(Thread::class)->latest();
     }
 
+    /**
+     * Fetch the last published reply for the user.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
     public function lastReply()
     {
         return $this->hasOne(Reply::class)->latest();
@@ -63,7 +68,11 @@ class User extends Authenticatable
         return $this->hasMany(Activity::class);
     }
 
-
+    /**
+     * Record that the user has read the given thread.
+     *
+     * @param Thread $thread
+     */
     public function read($thread)
     {
         cache()->forever(
@@ -72,11 +81,23 @@ class User extends Authenticatable
         );
     }
 
-    public function avatar()
+    /**
+     * Get the path to the user's avatar.
+     *
+     * @param  string $avatar
+     * @return string
+     */
+    public function getAvatarPathAttribute($avatar)
     {
-        return $this->avatar_path ?: 'avatars/default.png';
+        return asset($avatar ?: 'images/avatars/default.png');
     }
 
+    /**
+     * Get the cache key for when a user reads a thread.
+     *
+     * @param  Thread $thread
+     * @return string
+     */
     public function visitedThreadCacheKey($thread)
     {
         return sprintf("users.%s.visits.%s", $this->id, $thread->id);

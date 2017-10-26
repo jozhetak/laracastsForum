@@ -100,9 +100,10 @@ class ParticipateInThreadsTest extends TestCase
     }
 
     /** @test */
-    function replies_that_contains_spam_may_not_be_created()
+    function replies_that_contain_spam_may_not_be_created()
     {
         $this->withExceptionHandling();
+
         $this->signIn();
 
         $thread = create('App\Thread');
@@ -122,15 +123,12 @@ class ParticipateInThreadsTest extends TestCase
         $this->signIn();
 
         $thread = create('App\Thread');
+        $reply = make('App\Reply');
 
-        $reply = make('App\Reply', [
-            'body' => 'My Simple Reply'
-        ]);
-
-        $this->post($thread->path() . './replies', $reply->toArray())
+        $this->post($thread->path() . '/replies', $reply->toArray())
             ->assertStatus(200);
 
-        $this->post($thread->path() . './replies', $reply->toArray())
+        $this->post($thread->path() . '/replies', $reply->toArray())
             ->assertStatus(429);
     }
 }
