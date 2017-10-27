@@ -58317,6 +58317,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
 
 
 
@@ -58330,7 +58333,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         return {
             editing: false,
             id: this.data.id,
-            body: this.data.body
+            body: this.data.body,
+            isBest: false
         };
     },
 
@@ -58367,6 +58371,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             axios.delete('/replies/' + this.data.id);
 
             this.$emit('deleted', this.data.id);
+        },
+        markBestReply: function markBestReply() {
+            this.isBest = true;
         }
     }
 });
@@ -58751,7 +58758,8 @@ webpackContext.id = 181;
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
-    staticClass: "panel panel-default",
+    staticClass: "panel",
+    class: _vm.isBest ? 'panel-success' : 'panel-default',
     attrs: {
       "id": 'reply-' + _vm.id
     }
@@ -58820,9 +58828,9 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     domProps: {
       "innerHTML": _vm._s(_vm.body)
     }
-  })]), _vm._v(" "), (_vm.canUpdate) ? _c('div', {
+  })]), _vm._v(" "), _c('div', {
     staticClass: "panel-footer level"
-  }, [_c('button', {
+  }, [(_vm.canUpdate) ? _c('div', [_c('button', {
     staticClass: "btn btn-xs mr-1",
     on: {
       "click": function($event) {
@@ -58834,7 +58842,18 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     on: {
       "click": _vm.destroy
     }
-  }, [_vm._v("Delete")])]) : _vm._e()])
+  }, [_vm._v("Delete")])]) : _vm._e(), _vm._v(" "), _c('button', {
+    directives: [{
+      name: "show",
+      rawName: "v-show",
+      value: (!_vm.isBest),
+      expression: "! isBest"
+    }],
+    staticClass: "btn btn-xs btn-success mr-1 ml-a",
+    on: {
+      "click": _vm.markBestReply
+    }
+  }, [_vm._v("Best reply ?")])])])
 },staticRenderFns: []}
 module.exports.render._withStripped = true
 if (false) {
