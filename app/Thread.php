@@ -2,10 +2,11 @@
 
 namespace App;
 
-use App\Filters\ThreadFilters;
 use App\Events\ThreadReceivedNewReply;
-use Illuminate\Database\Eloquent\Model;
+use App\Filters\ThreadFilters;
+use App\Reply;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Model;
 
 class Thread extends Model
 {
@@ -196,5 +197,13 @@ class Thread extends Model
         }
 
         $this->attributes['slug'] = $slug;
+    }
+
+    public function markBestReply(Reply $reply)
+    {
+        $reply->thread->update(['best_reply_id' => $reply->id]);
+        // $this->best_reply_id = $reply->id;
+
+        // $this->save();
     }
 }
