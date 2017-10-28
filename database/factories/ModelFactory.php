@@ -32,7 +32,7 @@ $factory->state(App\User::class, 'unconfirmed', function() {
 
 $factory->state(App\User::class, 'administrator', function() {
     return [
-        'name' => 'JohnDoe'
+        'name' => 'laurent neveux'
     ];
 });
 
