@@ -65,7 +65,7 @@
         },
 
         created() {
-            window.events.$on('best-replies-selected', id => {
+            window.events.$on('best-reply-selected', id => {
                 this.isBest = (id === this.data.id)
             });
         },

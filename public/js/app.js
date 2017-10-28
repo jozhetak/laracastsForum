@@ -58372,7 +58372,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     created: function created() {
         var _this = this;
 
-        window.events.$on('best-replies-selected', function (id) {
+        window.events.$on('best-reply-selected', function (id) {
             _this.isBest = id === _this.data.id;
         });
     },
