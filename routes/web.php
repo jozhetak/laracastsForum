@@ -11,6 +11,9 @@
 |
 */
 
+Route::view('scan', 'scan');
+
+
 Route::get('/', function () {
     return view('welcome');
 });

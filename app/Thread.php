@@ -211,4 +211,9 @@ class Thread extends Model
 
         // $this->save();
     }
+
+    public function toSearchableArray()
+    {
+        return $this->toArray() + ['path' => $this->path()];
+    }
 }
