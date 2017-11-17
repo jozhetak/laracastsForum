@@ -70,13 +70,13 @@ trait Favoritable
         return $this->isFavorited();
     }
 
-    /**
-     * Get the number of favorites for the reply.
-     *
-     * @return integer
-     */
-    public function getFavoritesCountAttribute()
-    {
-        return $this->favorites->count();
-    }
+        /**
+         * Get the number of favorites for the reply.
+         *
+         * @return integer
+         */
+        public function getFavoritesCountAttribute()
+        {
+            return $this->favorites->count();
+        }
 }

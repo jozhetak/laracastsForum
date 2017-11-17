@@ -3,12 +3,12 @@
 namespace Tests\Feature;
 
 use Tests\TestCase;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class UserTest extends TestCase
 {
-    use DatabaseMigrations;
-    
+    use RefreshDatabase;
+
     /** @test */
     public function a_user_can_fetch_their_most_recent_reply()
     {

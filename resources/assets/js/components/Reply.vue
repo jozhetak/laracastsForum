@@ -51,7 +51,7 @@
         data() {
             return {
                 editing: false,
-                id: this.id,
+                id: this.reply.id,
                 body: this.reply.body,
                 isBest: this.reply.isBest,
             };
@@ -72,7 +72,7 @@
         methods: {
             update() {
                 axios.patch(
-                    '/replies/' + this.id, {
+                    '/replies/' + this.reply.id, {
                         body: this.body
                     })
                     .catch(error => {
