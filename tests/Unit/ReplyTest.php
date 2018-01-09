@@ -65,4 +65,12 @@ class ReplyTest extends TestCase
 
         $this->assertTrue($reply->fresh()->isBest());
     }
+
+    /** @test */
+    function a_reply_body_is_sanitized_automatically()
+    {
+        $reply = make('App\Reply', ['body' => '<script>alert("Hacked")</script><p>this is ok</p>']);
+
+        $this->assertEquals("<p>This is ok</p>", $reply->body);
+    }
 }
