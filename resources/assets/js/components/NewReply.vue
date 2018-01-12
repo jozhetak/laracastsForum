@@ -3,11 +3,6 @@
         <div v-if="signedIn">
             <div class="form-group">
                 <wysiwyg name="body" v-model="body" placeholder="Have something to say ?" ref="trix" :shouldClear="completed"></wysiwyg>
-                <!-- <textarea name="body"
-                          id="body"
-                          class="form-control"
-                          placeholder="Have something to say?"
-                          required -->
             </div>
 
             <button type="submit"

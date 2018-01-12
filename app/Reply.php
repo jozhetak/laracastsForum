@@ -50,6 +50,8 @@ class Reply extends Model
             // } option 1
 
             $reply->thread->decrement('replies_count');
+
+            Reputation::reduce($reply->owner, Reputation::REPLY_POSTED);
         });
     }
 
